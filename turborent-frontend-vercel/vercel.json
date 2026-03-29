@@ -1,0 +1,13 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "regions": ["cdg1"],
+  "env": {
+    "NEXT_PUBLIC_API_URL": "@turborent_api_url",
+    "NEXT_PUBLIC_SITE_URL": "@turborent_site_url",
+    "NEXT_PUBLIC_STRIPE_KEY": "@turborent_stripe_key",
+    "NEXT_PUBLIC_SOCKET_URL": "@turborent_socket_url"
+  }
+}
