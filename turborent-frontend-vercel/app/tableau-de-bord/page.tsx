@@ -131,57 +131,6 @@ export default function DashboardPage() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="card p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-gray-900">Réservations récentes</h2>
-            <Link href="/tableau-de-bord/reservations" className="text-sm text-blue-600 hover:underline">
-              Tout voir
-            </Link>
-          </div>
-
-          {loading ? (
-            <div className="space-y-3">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="skeleton h-12 rounded-lg" />
-              ))}
-            </div>
-          ) : rentals.length === 0 ? (
-            <div className="text-center py-8 text-gray-400">
-              <Calendar className="w-10 h-10 mx-auto mb-2 opacity-40" />
-              <p className="text-sm">Aucune réservation</p>
-            </div>
-          ) : (
-            <div className="space-y-2">
-              {rentals.map((r: any) => (
-                <div key={r.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors">
-                  <div
-                    className={`w-2 h-2 rounded-full ${
-                      r.status === 'confirme'
-                        ? 'bg-green-500'
-                        : r.status === 'en_cours'
-                        ? 'bg-blue-500'
-                        : r.status === 'termine'
-                        ? 'bg-gray-400'
-                        : r.status === 'annule'
-                        ? 'bg-red-400'
-                        : 'bg-yellow-400'
-                    }`}
-                  />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-900 truncate">
-                      {r.brand} {r.model}
-                    </p>
-                    <p className="text-xs text-gray-400">
-                      {new Date(r.start_date).toLocaleDateString('fr-FR')} →{' '}
-                      {new Date(r.end_date).toLocaleDateString('fr-FR')}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="card p-5">
           <h2 className="font-semibold text-gray-900 mb-4">Notifications</h2>
           {notifs.map((n: any) => (
             <div key={n.id} className="text-sm mb-2">
