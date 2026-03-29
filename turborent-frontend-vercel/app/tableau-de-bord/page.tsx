@@ -83,7 +83,7 @@ export default function DashboardPage() {
                     className={`badge ${
                       !k.doc
                         ? 'badge-red'
-                        : k.doc.status === 'valide'
+                        : k.doc?.status === 'valide'
                         ? 'badge-green'
                         : 'badge-yellow'
                     }`}
