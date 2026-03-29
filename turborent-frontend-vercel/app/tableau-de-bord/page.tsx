@@ -40,7 +40,6 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* En-tête */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Bonjour, {user.first_name} 👋</h1>
@@ -51,7 +50,6 @@ export default function DashboardPage() {
         </Link>
       </div>
 
-      {/* KYC Banner si non vérifié */}
       {!user.is_documents_verified && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-5">
           <div className="flex items-start gap-3">
@@ -64,9 +62,11 @@ export default function DashboardPage() {
               <div className="flex flex-wrap gap-2 mb-3">
                 {kycStatus.map(k => (
                   <span key={k.type} className={`badge ${
-                    !k.doc ? 'badge-red' : k.doc.status === 'valide' ? 'badge-green' : 'badge-yellow'
+                    !k.doc ? 'badge-red' : (k.doc as any)?.status === 'valide' ? 'badge-green' : 'badge-yellow'
                   }`}>
-                    {k.doc?.status === 'valide' ? <CheckCircle className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                    {(k.doc as any)?.status === 'valide'
+                      ? <CheckCircle className="w-3 h-3" />
+                      : <Clock className="w-3 h-3" />}
                     {k.label}
                   </span>
                 ))}
@@ -79,13 +79,12 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Stats rapides */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'Mes annonces', value: vehicles.length, icon: Car, href: '/tableau-de-bord/vehicules', color: 'blue' },
           { label: 'Réservations', value: rentals.length, icon: Calendar, href: '/tableau-de-bord/reservations', color: 'green' },
           { label: 'Messages non lus', value: notifs.length, icon: MessageSquare, href: '/tableau-de-bord/messages', color: 'purple' },
-          { label: 'Documents', value: `${kycStatus.filter(k => k.doc?.status === 'valide').length}/3`, icon: FileText, href: '/tableau-de-bord/documents', color: 'yellow' }
+          { label: 'Documents', value: `${kycStatus.filter(k => (k.doc as any)?.status === 'valide').length}/3`, icon: FileText, href: '/tableau-de-bord/documents', color: 'yellow' }
         ].map((stat, i) => (
           <Link key={i} href={stat.href} className="card p-5 hover:shadow-md transition-shadow">
             <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-${stat.color}-100 mb-3`}>
@@ -98,7 +97,6 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-6">
-        {/* Dernières réservations */}
         <div className="card p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-gray-900">Réservations récentes</h2>
@@ -135,7 +133,6 @@ export default function DashboardPage() {
           )}
         </div>
 
-        {/* Notifications non lues */}
         <div className="card p-5">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold text-gray-900">Notifications</h2>
